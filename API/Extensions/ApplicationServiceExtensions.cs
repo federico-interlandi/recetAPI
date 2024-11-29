@@ -19,6 +19,7 @@ public static class ApplicationServiceExtensions
         services.AddScoped<DatabaseInitializer>();
         services.AddScoped<ITokenService, TokenService>();
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IRecipeRepository, RecipeRepository>();
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         return services;
     }
