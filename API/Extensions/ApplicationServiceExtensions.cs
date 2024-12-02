@@ -15,7 +15,16 @@ public static class ApplicationServiceExtensions
                 {
                     opt.UseSqlite(config.GetConnectionString("DefaultConnection"));
                 });
-        services.AddCors();
+        services.AddCors(options =>
+            {
+                options.AddPolicy("AllowSpecificOrigin", policy =>
+                {
+                    policy.WithOrigins("http://localhost:4200") 
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowCredentials(); 
+                });
+            });
         services.AddScoped<DatabaseInitializer>();
         services.AddScoped<ITokenService, TokenService>();
         services.AddScoped<IUserRepository, UserRepository>();

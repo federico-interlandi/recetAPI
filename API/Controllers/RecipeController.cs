@@ -13,11 +13,14 @@ namespace API.Controllers;
 public class RecipesController(IRecipeRepository recipeRepository, IMapper mapper) : BaseApiController{
 
     [HttpGet("get")]
-    public async Task<ActionResult<IEnumerable<Recipe>>> GetRecipes(){
+    public async Task<ActionResult<IEnumerable<RecipeResponseDto>>> GetRecipes(){
 
         var recipes = await recipeRepository.GetRecipesByUserEmailAsync(User.GetUserEmail());
 
-        if(recipes != null) return Ok(recipes);
+        if(recipes != null) {
+            var response = mapper.Map<IEnumerable<RecipeResponseDto>>(recipes);
+            return Ok(response);
+        }
 
         return StatusCode(500, new { message = "Error retrieving recipes" });
     }
