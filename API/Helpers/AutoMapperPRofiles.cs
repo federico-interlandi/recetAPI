@@ -13,5 +13,6 @@ public class AutoMapperProfiles : Profile
         CreateMap<string, DateOnly>().ConvertUsing(s => DateOnly.Parse(s));
         CreateMap<User, UserDto>()
                 .ForMember(dest => dest.LocalId, opt => opt.MapFrom(src => src.Id));
+        CreateMap<RecipeUpdateDto, Recipe>();
     }
 }

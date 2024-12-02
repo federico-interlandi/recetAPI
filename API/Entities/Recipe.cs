@@ -15,5 +15,5 @@ public class Recipe : BaseEntity{
 
     public required string ImagePath { get; set; }
 
-    public required bool IsFavorite { get; set; } = false;
+    public bool? IsFavorite { get; set; } = false;
 }
